@@ -22,5 +22,5 @@ pub fn find_word(word: &str) -> rusqlite::Result<()> {
 
 #[test]
 fn test_find_word() {
-    find_word("かわく");
+    find_word("かわく").unwrap();
 }

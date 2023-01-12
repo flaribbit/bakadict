@@ -19,15 +19,13 @@ impl fmt::Display for WordItem {
             Paint::green(&self.pronounce),
             Paint::green(&self.accent),
         )?;
-        writeln!(
-            f,
-            "📘 {}\n{}{}\n",
-            Paint::new("Definitions").underline(),
-            Paint::blue("【".to_owned() + &self.type_ + "】"),
-            self.explain,
-        )?;
+        writeln!(f, "📕 {}", Paint::new("Definitions").underline())?;
+        if self.type_.len() > 0 {
+            write!(f, "{}", Paint::red(format!("【{}】", self.type_)))?;
+        }
+        writeln!(f, "{}\n", self.explain)?;
         if self.sentences.len() > 0 {
-            writeln!(f, "📒 {}", Paint::new("Examples").underline(),)?;
+            writeln!(f, "📘 {}", Paint::new("Examples").underline(),)?;
             for (i, sentence) in self.sentences.split('\n').enumerate() {
                 if i % 2 == 0 {
                     writeln!(f, "- {}", sentence)?;
@@ -35,6 +33,7 @@ impl fmt::Display for WordItem {
                     writeln!(f, "  {}", Paint::new(sentence).dimmed())?;
                 };
             }
+            writeln!(f)?;
         }
         Ok(())
     }
