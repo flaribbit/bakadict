@@ -14,14 +14,27 @@ impl fmt::Display for WordItem {
         use yansi::Paint;
         write!(
             f,
-            "{}\n{} {}\n{} {}\n{}",
+            "{} {} {}\n\n",
             Paint::new(&self.word).bold(),
-            Paint::red(&self.pronounce),
-            Paint::red(&self.accent),
+            Paint::green(&self.pronounce),
+            Paint::green(&self.accent),
+        )?;
+        writeln!(
+            f,
+            "📘 {}\n{}{}\n",
+            Paint::new("Definitions").underline(),
             Paint::blue("【".to_owned() + &self.type_ + "】"),
             self.explain,
-            Paint::new(&self.sentences).dimmed(),
-        )
+        )?;
+        writeln!(f, "📒 {}", Paint::new("Examples").underline(),)?;
+        for (i, sentence) in self.sentences.split('\n').enumerate() {
+            if i % 2 == 0 {
+                writeln!(f, "- {}", sentence)?;
+            } else {
+                writeln!(f, "  {}", Paint::new(sentence).dimmed())?;
+            };
+        }
+        Ok(())
     }
 }
 
@@ -33,7 +46,11 @@ fn test_display_word_item() {
         accent: "◎".to_owned(),
         type_: "名词".to_owned(),
         explain: "青蛙。".to_owned(),
-        sentences: "彼には何を言っても蛙の面に水だ。\n跟他说什么也不顶用。".to_owned(),
+        sentences: "蛙が鳴いている
+青蛙在叫
+彼には何を言っても蛙の面に水だ。
+跟他说什么也不顶用。"
+            .to_owned(),
     };
     println!("{word_item}")
 }
