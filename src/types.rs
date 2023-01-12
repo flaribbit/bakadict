@@ -26,13 +26,15 @@ impl fmt::Display for WordItem {
             Paint::blue("【".to_owned() + &self.type_ + "】"),
             self.explain,
         )?;
-        writeln!(f, "📒 {}", Paint::new("Examples").underline(),)?;
-        for (i, sentence) in self.sentences.split('\n').enumerate() {
-            if i % 2 == 0 {
-                writeln!(f, "- {}", sentence)?;
-            } else {
-                writeln!(f, "  {}", Paint::new(sentence).dimmed())?;
-            };
+        if self.sentences.len() > 0 {
+            writeln!(f, "📒 {}", Paint::new("Examples").underline(),)?;
+            for (i, sentence) in self.sentences.split('\n').enumerate() {
+                if i % 2 == 0 {
+                    writeln!(f, "- {}", sentence)?;
+                } else {
+                    writeln!(f, "  {}", Paint::new(sentence).dimmed())?;
+                };
+            }
         }
         Ok(())
     }
