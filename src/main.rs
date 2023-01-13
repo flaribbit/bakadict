@@ -7,5 +7,10 @@ fn main() {
         println!("usage: dict <word>");
         return;
     }
-    database::find_word(&args[1]).unwrap();
+    if args[1].is_ascii() {
+        use wana_kana::ConvertJapanese;
+        database::find_word(&args[1].to_hiragana()).unwrap();
+    } else {
+        database::find_word(&args[1]).unwrap();
+    }
 }
