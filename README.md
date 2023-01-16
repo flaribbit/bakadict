@@ -2,7 +2,7 @@
 
 离线的命令行日语词典
 
-![demo](https://user-images.githubusercontent.com/24885181/212700770-90a154e2-9bef-4822-b1ea-1ad2d25edcf1.png)
+![demo](https://user-images.githubusercontent.com/24885181/212703329-a306d9fd-b8f6-473c-836f-d9b19363fab1.png)
 
 ## 使用方法
 - `dict 割合`
