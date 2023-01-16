@@ -20,11 +20,11 @@ impl fmt::Display for WordItem {
             Paint::green(&self.accent),
         )?;
         writeln!(f, "📕 {}", Paint::new("Definitions").underline())?;
-        if self.type_.len() > 0 {
+        if !self.type_.is_empty() {
             write!(f, "{}", Paint::red(format!("【{}】", self.type_)))?;
         }
         writeln!(f, "{}\n", self.explain)?;
-        if self.sentences.len() > 0 {
+        if !self.sentences.is_empty() {
             writeln!(f, "📘 {}", Paint::new("Examples").underline(),)?;
             for (i, sentence) in self.sentences.split('\n').enumerate() {
                 if i % 2 == 0 {
