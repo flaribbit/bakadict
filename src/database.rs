@@ -8,11 +8,22 @@ fn open_database() -> rusqlite::Result<rusqlite::Connection> {
         .or_else(|_| rusqlite::Connection::open(database_path))
 }
 
-pub fn find_word(word: &str) -> rusqlite::Result<()> {
+pub fn find_word(word: &str, reverse: bool) -> rusqlite::Result<()> {
     let conn = open_database()?;
-    let param = format!("%{word}%");
-    let mut stmt = conn.prepare("SELECT * FROM word WHERE word LIKE ? OR pron LIKE ?")?;
-    let words = stmt.query_map((&param, &param), |row| {
+    let mut sql = "SELECT * FROM word WHERE word LIKE '%'||?1||'%' OR pron LIKE '%'||?1||'%'
+ORDER BY (
+CASE
+WHEN word=?1 OR pron=?1 THEN 1
+WHEN word LIKE ?1||'%' OR pron LIKE ?1||'%' THEN 2
+ELSE 3
+END
+)"
+    .to_owned();
+    if reverse {
+        sql += " DESC";
+    }
+    let mut stmt = conn.prepare(&sql)?;
+    let words = stmt.query_map((word,), |row| {
         Ok(types::WordItem {
             word: row.get(1)?,
             type_: row.get(2)?,
@@ -30,5 +41,5 @@ pub fn find_word(word: &str) -> rusqlite::Result<()> {
 
 #[test]
 fn test_find_word() {
-    find_word("かわく").unwrap();
+    find_word("かわく", false).unwrap();
 }
