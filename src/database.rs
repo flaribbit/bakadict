@@ -4,7 +4,10 @@ fn open_database() -> rusqlite::Result<rusqlite::Connection> {
     let self_path = std::env::current_exe().unwrap();
     let parent_path = self_path.parent().unwrap();
     let database_path = "databases/jp.db";
+    #[allow(deprecated)]
+    let data_path = std::env::home_dir().unwrap().join(".config/bakadict");
     rusqlite::Connection::open(parent_path.join(database_path))
+        .or_else(|_| rusqlite::Connection::open(data_path.join(database_path)))
         .or_else(|_| rusqlite::Connection::open(database_path))
 }
 
