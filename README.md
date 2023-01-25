@@ -6,7 +6,13 @@
 
 ## 安装
 ### Windows
+#### 手动安装
 从 [Release 页面](https://github.com/flaribbit/dict/releases) 下载压缩包，解压到你喜欢的位置，然后添加路径到环境变量的 `PATH` 中。
+
+#### 使用 scoop 安装
+```
+scoop install https://raw.githubusercontent.com/flaribbit/bakadict/master/bakadict.json
+```
 
 ### Linux, MacOS
 - 克隆本仓库

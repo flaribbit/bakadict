@@ -1,0 +1,15 @@
+{
+    "version": "0.1.0",
+    "description": "Offline Japanese dict in ternimal.",
+    "homepage": "https://github.com/flaribbit/bakadict",
+    "license": "MIT",
+    "url": "https://github.com/flaribbit/bakadict/releases/download/v0.1.0/win64.zip",
+    "hash": "b6096ffc905aa12e5e8dd191852e0afea27decbaacb7ca8399bc5effc43ff8c3",
+    "bin": "dict.exe",
+    "checkver": {
+        "github": "https://github.com/flaribbit/bakadict"
+    },
+    "autoupdate": {
+        "url": "https://github.com/flaribbit/bakadict/releases/download/v$version/win64.zip"
+    }
+}
