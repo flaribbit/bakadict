@@ -7,7 +7,7 @@
 ## 安装
 ### Windows
 #### 手动安装
-从 [Release 页面](https://github.com/flaribbit/dict/releases) 下载压缩包，解压到你喜欢的位置，然后添加路径到环境变量的 `PATH` 中。
+从 [Release 页面](https://github.com/flaribbit/bakadict/releases) 下载压缩包，解压到你喜欢的位置，然后添加路径到环境变量的 `PATH` 中。
 
 #### 使用 scoop 安装
 ```
@@ -21,7 +21,7 @@ scoop install https://raw.githubusercontent.com/flaribbit/bakadict/master/bakadi
   ```bash
   mkdir -p ~/.config/bakadict/databases
   cd ~/.config/bakadict/databases
-  wget https://github.com/flaribbit/dict/releases/download/databases/jp.db
+  wget https://github.com/flaribbit/bakadict/releases/download/databases/jp.db
   ```
 
 ## 使用方法
