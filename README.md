@@ -6,17 +6,25 @@
 
 ## 安装
 ### Windows
-#### 手动安装
+#### 方法 1：手动安装
 从 [Release 页面](https://github.com/flaribbit/bakadict/releases) 下载压缩包，解压到你喜欢的位置，然后添加路径到环境变量的 `PATH` 中。
 
-#### 使用 scoop 安装
+#### 方法 2：使用 scoop 安装（推荐）
 ```
 scoop install https://raw.githubusercontent.com/flaribbit/bakadict/master/bakadict.json
 ```
 
+[scoop 是什么？](https://scoop.sh/)
+
 ### Linux, MacOS
+#### 编译安装
+- 准备 rust 环境
 - 克隆本仓库
-- 编译并安装本程序：`cargo install --path .`
+- 编译并安装本程序：
+  ```bash
+  cargo build --release
+  cargo install --path .
+  ```
 - 下载数据库：
   ```bash
   mkdir -p ~/.config/bakadict/databases
