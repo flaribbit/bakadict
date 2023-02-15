@@ -17,6 +17,13 @@ scoop install https://raw.githubusercontent.com/flaribbit/bakadict/master/bakadi
 [scoop 是什么？](https://scoop.sh/)
 
 ### Linux, MacOS
+
+#### Aur
+
+```bash
+paru -S bakadict-git
+```
+
 #### 编译安装
 - 准备 rust 环境
 - 克隆本仓库
