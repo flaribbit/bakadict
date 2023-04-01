@@ -1,14 +1,10 @@
 use crate::types;
+use std::{env, path::PathBuf};
 
 fn open_database() -> rusqlite::Result<rusqlite::Connection> {
-    let self_path = std::env::current_exe().unwrap();
-    let parent_path = self_path.parent().unwrap();
-    let database_path = "databases/jp.db";
-    #[allow(deprecated)]
-    let data_path = std::env::home_dir().unwrap().join(".config/bakadict");
-    rusqlite::Connection::open(parent_path.join(database_path))
-        .or_else(|_| rusqlite::Connection::open(data_path.join(database_path)))
-        .or_else(|_| rusqlite::Connection::open(database_path))
+    let database_path = get_db_path();
+
+    rusqlite::Connection::open(&database_path)
 }
 
 pub fn find_word(word: &str, reverse: bool) -> rusqlite::Result<()> {
@@ -42,7 +38,33 @@ END
     Ok(())
 }
 
-#[test]
-fn test_find_word() {
-    find_word("かわく", false).unwrap();
+fn get_db_path() -> PathBuf {
+    match env::var("BAKADICT_JPDB_PATH") {
+        Ok(val) => {
+            if val.is_empty() {
+                panic!("ERROR: BAKADICT_JPDB_PATH is null.")
+            }
+
+            val.into()
+        }
+        Err(e) => panic!("{e}"),
+    }
+}
+
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_find_word() {
+        find_word("かわく", false).unwrap();
+    }
+
+    #[test]
+    fn test_get_db_path() {
+        use std::env;
+
+        env::set_var("BAKADICT_JPDB_PATH", "/test/jp.db");
+
+        assert_eq!("/test/jp.db", get_db_path());
+    }
 }
