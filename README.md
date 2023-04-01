@@ -34,16 +34,18 @@ paru -S bakadict-git
   ```
 - 下载数据库：
   ```bash
-  mkdir -p ~/.config/bakadict/databases
-  cd ~/.config/bakadict/databases
-  wget https://github.com/flaribbit/bakadict/releases/download/databases/jp.db
+  export BAKADICT_JPDB_PATH="$HOME/.config/bakadict/jp.db"
+  curl -L https://github.com/flaribbit/bakadict/releases/download/databases/jp.db -o $BAKADICT_JPDB_PATH
+  ```
+- 指定数据的路径:
+  ```bash
   ```
 
 ## 使用方法
 - `dict 割合`
-- `dict わりあい`  
+- `dict わりあい`
   支持使用汉字或假名查询
-- `dict wariai`  
+- `dict wariai`
   来回切换输入法很蛋疼，因此本程序还支持使用罗马音查询！
-- `dict wariai -`  
+- `dict wariai -`
   习惯上完全匹配的结果在最前面，终端输出后默认视图在底部，可以末尾添加 `-` 来反向输出查询结果。
